@@ -141,7 +141,7 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'auths.CustomUser'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
