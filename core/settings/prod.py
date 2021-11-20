@@ -20,8 +20,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', '2534a4dde10e2dbdebdb2675b6ac96aeb54409854d
 
 ALLOWED_HOSTS = ['online-library1990.herokuapp.com']
 
-import django_heroku
-django_heroku.settings(locals())
+
 # import dj_database_url 
 # prod_db  =  dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(prod_db)
