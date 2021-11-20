@@ -9,38 +9,18 @@ load_dotenv()
 DEBUG=True
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME':'',
-
-        'USER': '<db_username>',
-
-        'PASSWORD': '<password>',
-
-        'HOST': '<db_hostname_or_ip>',
-
-        'PORT': 5432
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-
 }
+
+import dj_database_url
+db_from_env =  dj_database_url.config()
+DATABASES['default'].update(db_from_env)  
+# ['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 SECRET_KEY = os.getenv('SECRET_KEY', '2534a4dde10e2dbdebdb2675b6ac96aeb54409854db0e3a05424a33067a4')
 
 ALLOWED_HOSTS = ['online-library1990.herokuapp.com']
-
-
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
