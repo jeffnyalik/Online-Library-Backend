@@ -24,7 +24,7 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', '2534a4dde10e2dbdebdb2675b6ac96aeb54409854db0e3a05424a33067a4')
 
 ALLOWED_HOSTS = ['online-library1990.herokuapp.com']
 
