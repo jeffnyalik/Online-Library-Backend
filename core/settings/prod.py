@@ -24,7 +24,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['https://online-library1990.herokuapp.com']
+ALLOWED_HOSTS = ['online-library1990.herokuapp.com']
 
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)
