@@ -31,11 +31,19 @@ class Book(models.Model):
         ('Actions', 'Actions'),
     )
 
+    BOOK_STATUS = (
+        ('Unavailable', 'Unavailable'),
+        ('Reserved', 'Reserved'),
+        ('Available', 'Available'),
+        
+    )
+
     title = models.CharField(blank=True, null=True, max_length=200)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='books')
     summary = models.TextField(blank=True, default="Description")
     isbn = models.CharField(max_length=200, unique=True)
     genre = models.CharField(max_length=100, choices=GENRES, default='Fiction', blank=True, null=True)
+    status = models.CharField(max_length=100, choices=BOOK_STATUS, default='Unavailable', blank=True)
 
     class Meta:
         verbose_name_plural = 'Books'
