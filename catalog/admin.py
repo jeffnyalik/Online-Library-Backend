@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, Author, BookInstance, Language, Genre
+from .models import Book, Author, BookInstance, Language
 
 
 class InstanceAdmin(admin.ModelAdmin):
@@ -7,13 +7,6 @@ class InstanceAdmin(admin.ModelAdmin):
     list_filter = ['status', 'due_back']
 
 admin.site.register(BookInstance, InstanceAdmin)
-
-
-class GenreAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    list_filter = ['name']
-
-admin.site.register(Genre, GenreAdmin)
 
 
 class LanguageAdmin(admin.ModelAdmin):
@@ -24,7 +17,7 @@ admin.site.register(Language, LanguageAdmin)
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'isbn', 'author']
+    list_display = ['title', 'isbn', 'author', 'genre']
     list_filter = ['title']
 
 admin.site.register(Book, BookAdmin)

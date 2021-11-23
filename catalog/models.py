@@ -2,15 +2,6 @@ from django.db import models
 import uuid # Required for unique book instances
 from auths.models import CustomUser
 
-
-class Genre(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
-    class Meta:
-        verbose_name_plural = 'Genres'
-    def __str__(self) -> str:
-        return self.name
-
-
 class Language(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     class Meta:
@@ -30,11 +21,21 @@ class Author(models.Model):
 
 
 class Book(models.Model):
+    GENRES = (
+        ('Political', 'Political'),
+        ('Religion', 'Religion'),
+        ('Fictions', 'Fictions'),
+        ('Drama', 'Drama'),
+        ('Adventure', 'Adventure'),
+        ('Literature', 'Literature'),
+        ('Actions', 'Actions'),
+    )
+
     title = models.CharField(blank=True, null=True, max_length=200)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='books')
     summary = models.TextField(blank=True, null=True)
     isbn = models.CharField(max_length=200, unique=True)
-    genre = models.ManyToManyField(Genre) ## Select a genre for the book
+    genre = models.CharField(max_length=100, choices=GENRES, default='Fiction', blank=True)
 
     class Meta:
         verbose_name_plural = 'Books'
@@ -42,6 +43,7 @@ class Book(models.Model):
     def __str__(self) -> str:
         return self.title
 
+   
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')

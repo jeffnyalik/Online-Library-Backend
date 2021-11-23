@@ -1,13 +1,7 @@
 from rest_framework import serializers
 from rest_framework.utils.model_meta import _get_reverse_relationships
 
-from catalog.models import Author, Book, Genre
-
-
-class GenreSerialzer(serializers.ModelSerializer):
-    class Meta:
-        model = Genre
-        fields = ['id', 'name']
+from catalog.models import Author, Book
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -18,9 +12,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    genre = GenreSerialzer(read_only=True, many=True)
-    author = AuthorSerializer()
+    # author = AuthorSerializer()
     class Meta:
-        fields = '__all__'
+        fields = ['id','title', 'isbn', 'summary', 'author', 'genre']
         model = Book
 

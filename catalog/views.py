@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from rest_framework import response
 from rest_framework.views import APIView
 from serializers.catalog.serializer import AuthorSerializer, BookSerializer
 from .models import BookInstance, Book, Author
 from rest_framework.response import Response
-from rest_framework import status
-
+from rest_framework import serializers, status
 
 
 class CountBooksApiView(APIView):
@@ -66,3 +66,12 @@ class BooksDetaiilView(APIView):
         book = get_object_or_404(Book, pk=pk)
         serializer = BookSerializer(book)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class BooksAddApIView(APIView):
+    def post(self, request, format=None):
+        serializer = BookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
