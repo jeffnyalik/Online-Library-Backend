@@ -33,9 +33,9 @@ class Book(models.Model):
 
     title = models.CharField(blank=True, null=True, max_length=200)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='books')
-    summary = models.TextField(blank=True, null=True)
+    summary = models.TextField(blank=True, default="Description")
     isbn = models.CharField(max_length=200, unique=True)
-    genre = models.CharField(max_length=100, choices=GENRES, default='Fiction', blank=True)
+    genre = models.CharField(max_length=100, choices=GENRES, default='Fiction', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Books'
@@ -47,9 +47,9 @@ class Book(models.Model):
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
-    book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True, related_name='books')
+    book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True, blank=True, related_name='books')
     imprint = models.CharField(max_length=200)
-    due_back = models.DateField(null=True, blank=True)
+    due_back = models.DateField(blank=True, null=True)
     borrower = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='borrower')
 
     LOAN_STATUS = (
