@@ -8,6 +8,7 @@ from .views import (
     CountBooksApiView, 
     NumberAuthorsApiView,
     BooksAddApIView,
+    AuthorAddApiView,
     )
 
 urlpatterns = [
@@ -19,5 +20,6 @@ urlpatterns = [
     path('all-books/', AllBooksApiView.as_view(), name='all-books'),
     path('add-book/',  BooksAddApIView.as_view(), name='add-book'),
     path('single-book/<int:pk>/', BooksDetaiilView.as_view(), name='single-book'),
+    path('add-author/', AuthorAddApiView.as_view(), name='add-author'),
 
 ]

@@ -5,7 +5,7 @@ from catalog.models import Author, Book
 
 
 class AuthorSerializer(serializers.ModelSerializer):
-    books = serializers.StringRelatedField(many=True)
+    books = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Author
         fields = ['id', 'first_name', 'last_name', 'date_of_birth', 'books']
